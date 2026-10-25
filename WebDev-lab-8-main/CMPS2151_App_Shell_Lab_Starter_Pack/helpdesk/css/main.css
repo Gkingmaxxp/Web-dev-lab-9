@@ -1,0 +1,167 @@
+/* ============================================================================
+   CMPS2151 — App Shell Transfer Lab
+   ----------------------------------------------------------------------------
+   Build the App Shell for your chosen mockup in this file.
+
+   Do not change reset.css.
+   Use the values already provided in token.css.
+
+   IMPORTANT: The <main> element must remain EMPTY.
+   ========================================================================== */
+
+/* 1. Page / shell ---------------------------------------------------------- */
+
+.app-shell {
+   display: grid;
+   grid-template-columns: auto 1fr;
+   min-height: 100dvh;
+   background: var(--surface);
+   color: var(--text-primary);
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 2. Navigation rail ------------------------------------------------------ */
+
+.navigation-rail {
+   display: grid;
+   grid-template-rows: auto minmax(0, 1fr) auto;
+   padding: 26px 16px 28px;
+   background: var(--rail-bg);
+   color: var(--rail-text);
+}
+
+/* 3. Brand block ---------------------------------------------------------- */
+
+.brand-block {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+   padding: 0 8px 30px;
+}
+
+.brand-block > svg {
+   flex: 0 0 auto;
+}
+
+.brand-copy {
+   min-width: 0;
+}
+
+.brand-name {
+   font-size: 21px;
+   font-weight: 700;
+   line-height: 1.2;
+}
+
+.brand-subtitle {
+   margin-top: 3px;
+   color: var(--rail-muted);
+   font-size: 12px;
+   white-space: nowrap;
+}
+
+/* 4. Navigation links and active state ----------------------------------- */
+
+.primary-navigation {
+   min-height: 0;
+}
+
+.navigation-list {
+   display: grid;
+   gap: 8px;
+   padding: 0;
+   list-style: none;
+}
+
+.navigation-link {
+   display: flex;
+   min-height: 56px;
+   align-items: center;
+   gap: 16px;
+   padding: 0 14px;
+   border-radius: 8px;
+   color: var(--rail-text);
+   font-size: 16px;
+   text-decoration: none;
+}
+
+.navigation-link > svg {
+   flex: 0 0 24px;
+}
+
+.navigation-link:hover {
+   background: var(--rail-hover);
+}
+
+.navigation-link:focus-visible {
+   outline: 2px solid var(--rail-text);
+   outline-offset: 2px;
+}
+
+.navigation-link[aria-current="page"] {
+   background: var(--rail-active);
+}
+
+/* 5. Pinned Log out action ----------------------------------------------- */
+
+.rail-account {
+   padding-top: 16px;
+   border-top: 1px solid var(--rail-hover);
+}
+
+/* 6. Topbar and user menu ------------------------------------------------- */
+
+.main-side {
+   display: grid;
+   min-width: 0;
+   grid-template-rows: 68px minmax(0, 1fr);
+}
+
+.topbar {
+   display: grid;
+   grid-template-columns: minmax(0, 1fr) auto;
+   align-items: center;
+   padding: 0 32px;
+   border-bottom: 1px solid var(--border);
+}
+
+.user-menu {
+   grid-column: 2;
+   display: grid;
+   grid-template-columns: 44px auto 10px;
+   align-items: center;
+   gap: 12px;
+}
+
+.user-name {
+   font-size: 15px;
+}
+
+.user-chevron {
+   width: 8px;
+   height: 8px;
+   border-right: 2px solid var(--text-muted);
+   border-bottom: 2px solid var(--text-muted);
+   transform: translateY(-2px) rotate(45deg);
+}
+
+/* 7. Initials avatar ------------------------------------------------------ */
+
+.user-avatar {
+   display: grid;
+   width: 44px;
+   aspect-ratio: 1;
+   place-items: center;
+   border-radius: 50%;
+   background: var(--accent);
+   color: var(--rail-text);
+   font-size: 18px;
+   font-weight: 700;
+}
+
+/* 8. Main content slot ---------------------------------------------------- */
+/* The main element stays EMPTY in HTML. Style only its place in the shell. */
+
+.workspace {
+   min-width: 0;
+}

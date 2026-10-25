@@ -1,0 +1,38 @@
+/* ============================================================================
+   token.css: every COLOUR for StockRoom lives here, and nowhere else.
+   ----------------------------------------------------------------------------
+   A "design token" is a named value. main.css never says "teal blue"; it says
+   var(--accent). To re-theme the whole app, you edit this one file.
+
+   Colours are written in OKLCH:  oklch(Lightness Chroma Hue)
+     Lightness  0 = black ... 1 = white
+     Chroma     0 = grey ... higher = more vivid
+     Hue        0-360 around the colour wheel (235 = teal blue)
+   Every token below uses hue 235. Only lightness and chroma change, so the
+   greys carry a faint teal blue tint and the whole app feels like one family.
+
+   THE RULE FOR THIS APP (StockRoom, Campus Inventory & Restock):
+     - ONE accent means "you can act on this" or "you are here" (--accent).
+     - The dark rail is a dark NEUTRAL surface (low chroma), not a loud colour.
+
+   Contrast was checked against WCAG: 4.5:1 for text, 3:1 for icons.
+   ========================================================================== */
+
+:root {
+  /* ---- Page surfaces and text (light area) ------------------------------- */
+  --surface: oklch(0.990 0.004 235);        /* page background (almost white) */
+  --border: oklch(0.880 0.012 235);         /* hairlines and dividers */
+  --text-primary: oklch(0.200 0.028 235);   /* headings, names, important text */
+  --text-muted: oklch(0.520 0.020 235);     /* secondary text */
+
+  /* ---- The accent: teal blue = "actionable or current page" ---------- */
+  --accent: oklch(0.470 0.098 235);         /* avatar, buttons, links */
+  --accent-hover: oklch(0.410 0.078 235);   /* darker on hover */
+
+  /* ---- Dark navigation rail ---------------------------------------------- */
+  --rail-bg: oklch(0.325 0.065 235);        /* rail background */
+  --rail-hover: oklch(0.405 0.075 235);     /* hover row, dividing line */
+  --rail-active: oklch(0.461 0.093 235);    /* current-page row (lighter) */
+  --rail-text: oklch(0.980 0.004 235);      /* text on the rail (near white) */
+  --rail-muted: oklch(0.800 0.030 235);     /* idle links and the small subtitle */
+}

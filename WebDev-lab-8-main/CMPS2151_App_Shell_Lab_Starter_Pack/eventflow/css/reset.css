@@ -1,0 +1,160 @@
+/* ============================================================================
+   reset.css 
+   ----------------------------------------------------------------------------
+   A "reset" is a small stylesheet that runs FIRST, before your own styles, to
+   flatten the inconsistent defaults every browser ships with. Browsers each
+   come with a built-in stylesheet (the "user-agent stylesheet") that adds
+   margins, sizing quirks, and spacing you did not ask for. This file removes
+   the ones that get in your way, so that when you write your own CSS you start
+   from a clean, predictable page instead of fighting invisible defaults.
+
+   Load order matters:   reset.css  -->  tokens.css --> main.css
+   This file is the foundation; nothing here uses your design tokens, because
+   tokens.css has not loaded yet. Read every comment — you should be able to
+   explain WHY each rule is here, not just what it does.
+   ========================================================================== */
+
+
+/* ----------------------------------------------------------------------------
+   1. Make box-sizing predictable — the single most useful line in the file.
+   ----------------------------------------------------------------------------
+   By default, `width` sets only the CONTENT width, and any padding and border
+   are ADDED on top — so a box you set to 300px actually renders wider than 300,
+   and layouts overflow unexpectedly. `border-box` changes `width` to mean the
+   WHOLE box (content + padding + border), which is what you almost always want.
+
+   We apply it to every element and pseudo-element with the universal selector
+   `*` so the rule is truly global and you never have to think about it again.
+-----------------------------------------------------------------------------*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+
+/* ----------------------------------------------------------------------------
+   2. Remove the default margins the browser adds to almost everything.
+   ----------------------------------------------------------------------------
+   Headings, paragraphs, lists, figures and the body all arrive with margins
+   you did not choose (that is why a bare <h1> has space above it). Zeroing them
+   here means ALL spacing becomes a deliberate decision you make with your
+   spacing tokens — not a mystery inherited from the browser.
+
+   Why `:not(dialog)` and not a plain `*`?
+   The one element whose default margin we must KEEP is <dialog>. When a dialog
+   is opened as a modal, the browser centres it on screen using `margin: auto`
+   from its built-in styles. A blanket `* { margin: 0 }` would wipe that out and
+   the dialog would jump to a corner. Excluding <dialog> leaves its centring
+   intact. (You will not use <dialog> until much later — a modal needs a little
+   JavaScript to open — but writing the reset correctly now means it never trips
+   you up when you get there.)
+-----------------------------------------------------------------------------*/
+*:not(dialog) {
+  margin: 0;
+}
+
+
+/* ----------------------------------------------------------------------------
+   3. Sensible defaults on the root and body.
+   ----------------------------------------------------------------------------
+   `-webkit-text-size-adjust: 100%` stops some mobile browsers from silently
+   enlarging your text when the screen rotates, so your type scale stays as you
+   designed it. `100%` (not `none`) disables that automatic boosting while still
+   letting the user pinch-zoom or bump their own text size — so it is safe for
+   accessibility. We include both the -webkit- prefixed form (Safari understands
+   only that) and the standard unprefixed form (Blink, Firefox on Android).
+
+   `line-height: 1.5` gives body text comfortable, readable spacing between
+   lines. The browser default is a little tight for long-form reading.
+
+   `-webkit-font-smoothing: antialiased` makes text render a touch lighter and
+   cleaner on WebKit browsers (Safari) — a small polish, not essential.
+-----------------------------------------------------------------------------*/
+html {
+  -webkit-text-size-adjust: 100%;   /* Safari, and aliased by Chrome/Edge */
+  text-size-adjust: 100%;           /* standard form: Blink, Firefox-Android */
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+/* ----------------------------------------------------------------------------
+   4. Make images behave — this is the line you will thank later.
+   ----------------------------------------------------------------------------
+   Two problems this fixes:
+
+   `display: block`  — images are INLINE by default, which means they sit on the
+   text baseline and leave a mysterious few-pixel gap underneath. Making them
+   block removes that gap and lets them sit cleanly in a layout.
+
+   `max-width: 100%` — by default an image displays at its own pixel size, so a
+   1200px-wide photo will overflow a 320px phone screen and cause sideways
+   scrolling. `max-width: 100%` says "never be wider than your container"; the
+   image shrinks to fit but never grows past its natural size. And because we
+   never set a height, the height stays `auto`: the browser works out the
+   matching height for whatever the width becomes, so the image keeps its
+   original proportions as it shrinks — it never squishes or stretches.
+
+   We include <picture> and <svg> so responsive images and inline SVGs get the
+   same treatment.
+-----------------------------------------------------------------------------*/
+img, picture, svg {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* ----------------------------------------------------------------------------
+   5. Let form controls inherit your fonts.
+   ----------------------------------------------------------------------------
+   Buttons, inputs, and textareas do NOT inherit font settings by default — they
+   fall back to the browser's own ugly system font. `font: inherit` makes them
+   use the same font as the surrounding text, so your forms match your page.
+   (You will not build forms until later, but the rule is harmless now and one
+   less surprise when you get there.)
+-----------------------------------------------------------------------------*/
+input, button, textarea, select {
+  font: inherit;
+}
+
+
+/* ----------------------------------------------------------------------------
+   6. Improve text wrapping on headings and paragraphs.
+   ----------------------------------------------------------------------------
+   `text-wrap: balance` on headings evens out the number of words per line so a
+   short heading does not leave one lonely word on the last line.
+
+   `text-wrap: pretty` on paragraphs prevents a single word ("a widow") from
+   being stranded alone on the final line of a paragraph.
+
+   Both are small typographic niceties. They are widely supported today and do
+   nothing harmful where they are not.
+-----------------------------------------------------------------------------*/
+h1, h2, h3, h4 {
+  line-height: 1.15;
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
+}
+
+
+/* ----------------------------------------------------------------------------
+   7. Stop a single long "word" from overflowing its container.
+   ----------------------------------------------------------------------------
+   Normal wrapping only breaks text BETWEEN words. So one unbreakable string
+   with no spaces — a long URL, a file path, a 40-character hashtag — pokes out
+   past its box and causes sideways scrolling, the same overflow problem that
+   `max-width: 100%` fixes for images, but for text.
+
+   `overflow-wrap: break-word` says: if a word genuinely will not fit on a line,
+   break it mid-word rather than let it overflow. It only acts in that edge case
+   — ordinary prose wraps normally and is untouched. This matters most for text
+   you did not write yourself: a citizen could paste a giant link into a sighting
+   description, and this keeps it from blowing out your layout.
+-----------------------------------------------------------------------------*/
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
