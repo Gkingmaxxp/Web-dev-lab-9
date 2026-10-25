@@ -1,0 +1,4 @@
+/* Small standalone reset. In your existing project, retain your supplied reset. */
+* { box-sizing: border-box; }
+body, h1, h2, p { margin: 0; }
+button, input, select, textarea { font: inherit; }

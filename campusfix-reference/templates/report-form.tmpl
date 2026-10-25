@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusFix</title>
+  <link rel="stylesheet" href="/static/reset.css">
+  <link rel="stylesheet" href="/static/token.css">
+  <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+<div class="shell">
+  <aside>
+    <h2>CampusFix</h2><p>University of Belize</p>
+    <nav aria-label="Main navigation">
+      <a href="/reports/create" aria-current="page">Report issue</a>
+      <a href="/reports" >All reports</a>
+    </nav>
+    <span class="account">Maya · Demo user</span>
+  </aside>
+  <div class="main-side">
+    <header><span>M</span> Maya</header>
+    <main>
+      <a class="back-link" href="/reports">Back to reports</a>
+      <h1>Report an issue</h1>
+      <p>Tell us what needs attention on campus. All fields are required.</p>
+      <form action="/reports/create" method="post">
+        <div class="form-grid">
+        <div class="field field--full">
+          <label for="title">Issue title</label>
+          <input id="title" name="title" value="{{.Title}}" 
+                 {{if .TitleError}}
+                   aria-describedby="title-error"
+                   aria-invalid="true"
+                 {{end}} required>
+          {{if .TitleError}}
+            <p class="error" id="title-error">{{.TitleError}}</p>
+          {{end}}
+        </div>
+        <div class="field">
+          <label for="category">Issue category</label>
+          <select id="category" name="category" 
+                 {{if .CategoryError}}
+                   aria-describedby="category-error"
+                   aria-invalid="true"
+                 {{end}} required>
+            <option value="">Choose a category</option>
+            <option value="Electrical" {{if eq .Category "Electrical"}}selected{{end}}>Electrical</option>
+            <option value="Plumbing" {{if eq .Category "Plumbing"}}selected{{end}}>Plumbing</option>
+            <option value="Furniture" {{if eq .Category "Furniture"}}selected{{end}}>Furniture</option>
+            <option value="Other" {{if eq .Category "Other"}}selected{{end}}>Other</option>
+          </select>
+          {{if .CategoryError}}
+            <p class="error" id="category-error">{{.CategoryError}}</p>
+          {{end}}
+        </div>
+        <div class="field">
+          <label for="location">Room or location</label>
+          <input id="location" name="location" value="{{.Location}}" 
+                 {{if .LocationError}}
+                   aria-describedby="location-error"
+                   aria-invalid="true"
+                 {{end}} required>
+          {{if .LocationError}}
+            <p class="error" id="location-error">{{.LocationError}}</p>
+          {{end}}
+        </div>
+        <div class="field field--full">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" rows="5" 
+                 {{if .DescriptionError}}
+                   aria-describedby="description-error"
+                   aria-invalid="true"
+                 {{end}} required>{{.Description}}</textarea>
+          {{if .DescriptionError}}
+            <p class="error" id="description-error">{{.DescriptionError}}</p>
+          {{end}}
+        </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit">Submit report</button>
+          <a href="/reports">Cancel</a>
+        </div>
+        <p class="hint">Your report will be reviewed by campus maintenance.</p>
+      </form>
+    </main>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+/* CampusFix palette based on the supplied purple and gold reference. */
+:root {
+  --rail-bg: #3b1768;
+  --brand: #6b21b5;
+  --brand-hover: #541b91;
+  --gold: #ffe600;
+  --page-bg: #f7f7fc;
+  --surface: #ffffff;
+  --text: #141322;
+  --muted: #666478;
+  --border: #c7c5d5;
+  --danger: #b42318;
+  --danger-bg: #fff8f7;
+  --focus: #cdb4e8;
+}

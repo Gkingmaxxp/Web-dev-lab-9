@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusFix</title>
+  <link rel="stylesheet" href="/static/reset.css">
+  <link rel="stylesheet" href="/static/token.css">
+  <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+<div class="shell">
+  <aside>
+    <h2>CampusFix</h2><p>University of Belize</p>
+    <nav aria-label="Main navigation">
+      <a href="/reports/create" >Report issue</a>
+      <a href="/reports" aria-current="page">All reports</a>
+    </nav>
+    <span class="account">Maya · Demo user</span>
+  </aside>
+  <div class="main-side">
+    <header><span>M</span> Maya</header>
+    <main>
+      <h1>Saved maintenance reports</h1>
+      <p>Saved records: {{len .Items}}</p>
+      <p><a href="/reports/create">Report issue</a></p>
+      {{range .Items}}
+      <article>
+        <h2>{{.Title}}</h2>
+        <p><strong>Location</strong> {{.Location}}</p>
+        <p><strong>Category</strong> {{.Category}}</p>
+        <p class="description">{{.Description}}</p>
+      </article>
+      {{else}}
+      <p>No reports saved yet. Create your first report.</p>
+      {{end}}
+    </main>
+  </div>
+</div>
+</body>
+</html>
