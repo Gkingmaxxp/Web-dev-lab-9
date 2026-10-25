@@ -1,12 +1,12 @@
 /* ============================================================================
    CMPS2151 — App Shell Transfer Lab
    ----------------------------------------------------------------------------
-   Build the App Shell for your chosen mockup in this file.
+   Style the HelpDesk shell and its form and saved-record pages.
 
    Do not change reset.css.
    Use the values already provided in token.css.
 
-   IMPORTANT: The <main> element must remain EMPTY.
+   The <main> element holds the current form or saved-record list.
    ========================================================================== */
 
 /* 1. Page / shell ---------------------------------------------------------- */
@@ -160,8 +160,149 @@
 }
 
 /* 8. Main content slot ---------------------------------------------------- */
-/* The main element stays EMPTY in HTML. Style only its place in the shell. */
-
 .workspace {
    min-width: 0;
+   padding: 32px;
+}
+
+.workspace > h1 {
+   margin-bottom: 24px;
+   font-size: 28px;
+}
+
+.back-link,
+.list-action a {
+   color: var(--accent);
+   font-weight: 600;
+   text-decoration: none;
+}
+
+.back-link:hover,
+.list-action a:hover {
+   color: var(--accent-hover);
+   text-decoration: underline;
+}
+
+.submission-form {
+   max-width: 760px;
+}
+
+.form-grid {
+   display: grid;
+   grid-template-columns: repeat(2, minmax(0, 1fr));
+   gap: 20px;
+}
+
+.field {
+   display: grid;
+   align-content: start;
+   gap: 8px;
+}
+
+.field--full {
+   grid-column: 1 / -1;
+}
+
+.field label {
+   font-size: 14px;
+   font-weight: 600;
+}
+
+.field input,
+.field select,
+.field textarea {
+   width: 100%;
+   min-height: 44px;
+   padding: 10px 12px;
+   border: 1px solid var(--border);
+   border-radius: 4px;
+   background: white;
+   color: var(--text-primary);
+}
+
+.field textarea {
+   min-height: 130px;
+   resize: vertical;
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+   outline: 2px solid var(--accent);
+   outline-offset: 2px;
+}
+
+.field [aria-invalid="true"] {
+   border-color: #b42318;
+}
+
+.error {
+   color: #b42318;
+   font-size: 14px;
+}
+
+.form-actions {
+   margin-top: 24px;
+}
+
+.form-actions button {
+   min-height: 44px;
+   padding: 0 18px;
+   border: 0;
+   border-radius: 4px;
+   background: var(--accent);
+   color: white;
+   font-weight: 600;
+   cursor: pointer;
+}
+
+.form-actions button:hover {
+   background: var(--accent-hover);
+}
+
+.record-count {
+   margin-bottom: 12px;
+   color: var(--text-muted);
+}
+
+.record-list {
+   display: grid;
+   max-width: 900px;
+   gap: 16px;
+   margin-top: 24px;
+}
+
+.record-item {
+   padding: 16px;
+   border: 1px solid var(--border);
+   border-radius: 4px;
+   background: white;
+}
+
+.record-item h2 {
+   margin-bottom: 12px;
+   font-size: 18px;
+}
+
+.record-item p + p {
+   margin-top: 6px;
+}
+
+.record-item .description {
+   margin-top: 12px;
+   white-space: pre-wrap;
+}
+
+@media (max-width: 720px) {
+   .workspace {
+      padding: 24px 16px;
+   }
+
+   .form-grid {
+      grid-template-columns: 1fr;
+   }
+
+   .field--full {
+      grid-column: auto;
+   }
 }

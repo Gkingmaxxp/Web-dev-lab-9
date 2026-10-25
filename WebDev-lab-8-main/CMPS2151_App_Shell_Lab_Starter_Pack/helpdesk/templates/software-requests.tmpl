@@ -3,12 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CMPS2151 App Shell Lab — helpdesk</title>
-
-  <!-- Keep this load order: reset -> tokens -> your CSS -->
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/token.css">
-  <link rel="stylesheet" href="css/main.css">
+  <title>HelpDesk — {{.PageTitle}}</title>
+  <link rel="stylesheet" href="/static/reset.css">
+  <link rel="stylesheet" href="/static/token.css">
+  <link rel="stylesheet" href="/static/main.css">
 </head>
 <body>
   <div class="app-shell">
@@ -24,27 +22,33 @@
       <nav class="primary-navigation" aria-label="Primary">
         <ul class="navigation-list">
           <li>
-            <a class="navigation-link" href="#dashboard" aria-current="page">
+            <a class="navigation-link" href="#dashboard" {{if eq .CurrentPage "dashboard"}}aria-current="page"{{end}}>
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
               <span>Dashboard</span>
             </a>
           </li>
           <li>
-            <a class="navigation-link" href="#new-ticket">
+            <a class="navigation-link" href="/tickets/create" {{if eq .CurrentPage "support-ticket"}}aria-current="page"{{end}}>
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
-              <span>New ticket</span>
+              <span>Support ticket</span>
             </a>
           </li>
           <li>
-            <a class="navigation-link" href="#my-tickets">
+            <a class="navigation-link" href="/tickets" {{if eq .CurrentPage "tickets"}}aria-current="page"{{end}}>
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
-              <span>My tickets</span>
+              <span>Support tickets</span>
             </a>
           </li>
           <li>
-            <a class="navigation-link" href="#all-tickets">
+            <a class="navigation-link" href="/software-requests/create" {{if eq .CurrentPage "software-request"}}aria-current="page"{{end}}>
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M8 9h8M8 12h5"/></svg>
+              <span>Software request</span>
+            </a>
+          </li>
+          <li>
+            <a class="navigation-link" href="/software-requests" {{if eq .CurrentPage "software-requests"}}aria-current="page"{{end}}>
               <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6v3H9z"/><path d="M15 4.5h3a2 2 0 012 2V20a2 2 0 01-2 2H6a2 2 0 01-2-2V6.5a2 2 0 012-2h3"/><path d="M8 12h8M8 16h8"/></svg>
-              <span>All tickets</span>
+              <span>Software requests</span>
             </a>
           </li>
           <li>
@@ -73,7 +77,24 @@
         </div>
       </header>
 
-      <main class="workspace" id="dashboard" aria-label="Dashboard"></main>
+      <main class="workspace" aria-label="{{.PageTitle}}">
+        <h1>{{.PageTitle}}</h1>
+        <p class="record-count">Saved records: {{len .Items}}</p>
+        <p class="list-action"><a href="{{.FormURL}}">{{.FormLabel}}</a></p>
+        <p class="list-action"><a href="{{.OtherListURL}}">View {{.OtherListLabel}}</a></p>
+        <section class="record-list" aria-label="{{.PageTitle}}">
+          {{range .Items}}
+          <article class="record-item">
+            <h2>{{.Title}}</h2>
+            <p><strong>Location</strong> {{.Location}}</p>
+            <p><strong>Category</strong> {{.Category}}</p>
+            <p class="description">{{.Description}}</p>
+          </article>
+          {{else}}
+          <p>{{.EmptyMessage}}</p>
+          {{end}}
+        </section>
+      </main>
     </div>
   </div>
 </body>
